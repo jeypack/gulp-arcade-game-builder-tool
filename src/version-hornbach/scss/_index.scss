@@ -1,0 +1,779 @@
+@charset "UTF-8";
+// CSS Document index.css
+
+//@import url('https://fonts.googleapis.com/css?family=Barlow:500,800&display=swap');
+
+// +++ BEGIN VARIABLES WITH COLORS +++
+$bkg-color: #000;
+$stage-color: #fcee21;
+$loader-color-1: $stage-color;
+$loader-color-2: #f49c0e;
+
+$point-size: 12px;
+
+// +++ FOLLOWED BY VARIABLES FOR CALC +++
+// using calc with sass via string interpolation: #{$factor-petal-top}
+//  e.g.: height: calc(100vw * #{$factor-ground-width} * #{$factor-ground-height});
+$screen-width: 320px;
+$screen-height: 570px;
+$ground-width: 320px;
+$ground-height: 1920px;
+
+$player-width: 32px;
+$player-height: 125px;
+$player-start-height: 60px;
+$player-mid-height: 34px;
+$player-end-height: 31px;
+
+@font-face {
+    font-family: uni0553;
+    src: url(../assets/uni0553-webfont.woff);
+    //font-weight: bold;
+}
+
+//transform: scale(1.0);
+//height: calc(100vh - calc(100vh - 100%))
+
+//animation-name: none
+//animation-duration: 0s
+//animation-timing-function: ease
+//animation-delay: 0s
+//animation-iteration-count: 1
+//animation-direction: normal
+//animation-fill-mode: none
+//animation-play-state: running
+@keyframes blink {
+    0% { opacity: 1; }
+    15% { opacity: 1; }
+    55% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes zoomItem {
+    0% { transform: scale(1.0); }
+    15% { transform: scale(1.0); }
+    55% { transform: scale(1.5); }
+    100% { transform: scale(1.0); }
+}
+
+@keyframes zoomHS {
+    0% { transform: scale(1.0); }
+    15% { transform: scale(1.0); }
+    55% { transform: scale(1.15); }
+    100% { transform: scale(1.0); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+* {-webkit-box-sizing: border-box;box-sizing: border-box;}
+*:before,*:after {-webkit-box-sizing: border-box;box-sizing: border-box;}
+
+html, body {
+    //position: fixed;
+    width:100%;
+    height: 100%;
+}
+body {
+    //position: fixed;
+    //position: relative;
+    margin:0;
+    padding:0;
+    border:0;
+    height: calc(100vh - calc(100vh - 100%));
+    min-height: -webkit-fill-available;
+    font-family:'uni0553',monospace,sans-serif;
+    font-weight:normal;
+    overflow: hidden;
+    -webkit-text-size-adjust: none;
+	//touch-action: none;
+    //pointer-events: none;
+}
+
+// NO BORDER FireFox
+object, embed { outline: none !important; }
+a img { border: none !important; }
+a img, a:focus, a:active  { outline: none !important; }
+a { color: inherit; text-decoration: inherit; }
+
+div.consolas {
+    display: none;
+    position: fixed;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.1;
+    width: 46%;
+    height: auto;
+    min-height: 40px;
+    overflow: hidden;
+    padding: 5px;
+}
+#consolas-1 { left: auto; right: 10px; top: 10px; }
+
+#loader {
+    position:absolute;
+    display: none;
+    left:0px;top:0px;right:0px;bottom:0px;
+    margin: auto;
+    width: 36px;
+    height: 36px;
+    span {
+        display: inline-block;
+        //border: 9px solid #fffbdb;
+        border: 9px solid $loader-color-1;
+        border-top: 9px solid $loader-color-2;
+        border-bottom: 9px solid $loader-color-2;
+        border-radius: 50%;
+        width: 100%; height: 100%;
+        animation: spin 0.7s ease-in-out infinite;
+    }
+}
+
+/* GAME */
+.game-wrapper {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left:0px;top:0px;
+    background: transparent url(../assets/ESH-game-bkg.png);
+    //background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    //touch-action: manipulation;
+    //pointer-events: initial;
+    .game-content {
+        display: block;
+        position: absolute;
+        left:0px;top:0px;right:0px;bottom:0px;
+        width: $screen-width;
+        height: $screen-height;
+        margin: auto;
+        //touch-action: manipulation;
+        //pointer-events: initial;
+        .image-end {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            &.image-end-1 {
+                background: transparent url(../assets/game-end-1.jpg) 0 0 / cover;
+            }
+            &.image-end-2 {
+                background: transparent url(../assets/game-end-2.jpg) 0 0 / cover;
+            }
+            &.image-end-3 {
+                background: transparent url(../assets/game-end-3.jpg) 0 0 / cover;
+            }
+            &.image-end-4 {
+                background: transparent url(../assets/game-end-4.jpg) 0 0 / cover;
+            }
+            &.image-end-5 {
+                background: transparent url(../assets/game-end-5.jpg) 0 0 / cover;
+            }
+        }
+
+    }
+}
+
+#ground-move-dummy {
+    display: none;
+    position: absolute;
+    left:0px;top:0px;right:0px;bottom:0px;
+    touch-action: none;
+    user-select: none;
+    overscroll-behavior-x: none;
+    .tracker {
+        display: block;
+        position: absolute;
+        left:0px;top:0px;right:0px;bottom:0px;
+        //width: $screen-width;
+        //height: $screen-height;
+        //margin: auto;
+        touch-action: none;
+        user-select: none;
+        //background: rgba(150,0,0,0.4);
+        background: rgba(0,0,0,0);
+        overscroll-behavior-x: none;
+    }
+}
+//unused at the moment
+div.stage-rect {
+    position: absolute;
+    left:0px;top:0px;right:0px;bottom:0px;
+    width: $screen-width;
+    height: $screen-height;
+    background: transparent;
+    margin: auto;
+    user-select: none;
+}
+
+#hornbach-logo {
+    display: block;
+    position: relative;
+    z-index: 100;
+    a {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        width: 180px;
+        height: 100%;
+    }
+    .hornbach-logo {
+        background: transparent url(../assets/hornbach_logo_de.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
+div.wrapper-game div {position:absolute;left:0px;top:0px;width:100%;height:100%;overflow:hidden;}
+div.wrapper-game svg {position:absolute;left:0px;top:0px;width:100%;height:100%;overflow:visible;}
+
+#game,#ui {
+    display: block;
+    position: absolute;
+    left:0px;top:0px;right:0px;bottom:0px;
+    width: $screen-width;
+    height: $screen-height;
+    background: transparent;
+    margin: auto;
+    overflow: visible;
+    pointer-events: auto;
+}
+
+#game {
+    opacity: 0;
+}
+
+#ui {
+    .video {
+        display: block;
+        position: absolute;
+        overflow: visible;
+        background: transparent;
+        width: $screen-width;
+        height: $screen-height;
+        top: 0;;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+    video {
+        display: inline-block;
+        position: absolute;
+        width: $screen-width;
+        height: $screen-height;
+        touch-action: none;
+    }
+    #video-lost {  display: none; }
+    #video-win {  display: none; }
+    #video-highscore {  display: none; }
+    #video-info {  display: none; }
+    #video-result-1 { display: none; }
+    #video-result-2 { display: none; }
+    #video-result-3 { display: none; }
+    #video-result-4 { display: none; }
+    #video-result-5 { display: none; }
+}
+
+//
+#playground {
+    overflow: visible;
+    background: transparent;
+    width: $screen-width;
+    height: $screen-height;
+    top: 0; left: 0; right: 0; margin: 0 auto;
+    user-select: none;
+}
+
+div.highscore {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    color: #fff;
+    text-shadow: -2px 2px 1px #000;
+    &.points {
+        height: auto;
+        text-align: center;
+        font-size: 40px;
+        .points {
+            display: inline-block;
+            animation: zoomHS 1.0s ease 0.0s infinite;
+        }
+    }
+    &.all {
+        top: 90px;
+        height: 340px;
+        > .wrapper {
+            //position: absolute;
+            //top: 0; left: 0; right: 0;
+            //margin: 0 auto;
+            touch-action: manipulation;
+            pointer-events: initial;
+            width: 100%; height: 100%;
+            // has to be scroll, not auto
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            .item {
+                font-size: 14px;
+                text-shadow: -2px 2px 1px #000;
+                &.index {
+                    display: inline-block;
+                    padding-right: 10px;
+                    width: 17%;
+                    text-align: right;
+                }
+                &.name {
+                    display: inline-block;
+                    padding-left: 10px;
+                    width: 61%;
+                }
+                &.score {
+                    padding: 0;
+                    display: inline-block;
+                    padding-right: 8px;
+                    text-align: right;
+                    width: 22%;
+                }
+            }
+        }
+    }
+    &.form {
+        //background: url(../assets/highscore-top100-in.jpg) 0px 0px/contain no-repeat;
+        //display: block;
+        > .wrapper {
+            position: absolute;
+            top: 256px; left: 0; right: 0;
+            margin: 0 auto;
+            width: 75%;
+            text-align: center;
+            > div {
+                margin-bottom: 5px;
+            }
+            input {
+                font-size: 21px;
+                padding: 5px 10px;
+                font-family:'uni0553',monospace,sans-serif;
+                width: 100%;
+                text-align: center;
+                //box-shadow: -2px 2px 1px #000;
+                border: 0;
+            }
+        }
+    }
+}
+
+#ui-social-share {
+    position: absolute;
+    display: none;
+    width: $screen-width;
+    height: $screen-height;
+    top: 0; left: 0; right: 0; margin: 0 auto;
+    background-color: rgba(0,0,0,0.85);
+    .ui-wrapper {
+        position: absolute;
+        display: block;
+        top: 0; left: 0; right: 0; bottom: 0; margin: auto;
+        width:278px; height:248px;
+    }
+    .close-btn {
+        position: absolute;
+        display: block;
+        left: auto; top: 0px; right: 0px;
+        width:50px; height:50px;
+        padding: 12px;
+        text-align: center;
+    }
+    .text,.social {
+        position: absolute;
+        top: 0; left: 0; right: 0; margin: 0 auto;
+        width: 270px;
+        height: 120px;
+        padding: 50px 20px 0 20px;
+        font-size: 28px;
+        line-height: 1.0;
+        text-align: center;
+    }
+    .social {
+        top: 90px;
+        a {
+            display: inline-block;
+        }
+        span {
+            display: inline-block;
+            width:36px; height:36px;
+        }
+    }
+}
+
+.icon {
+    background-image: url(../assets/game-ui.png);
+    background-repeat: no-repeat;
+    overflow: hidden;
+    &.ui-bausteine {width:25px; height:15px; background-position: -476px -183px}
+    &.ui-boost {width:25px; height:25px; background-position: -478px -52px}
+    &.ui-brause {width:25px; height:21px; background-position: -478px -136px}
+    &.ui-brush {width:15px; height:25px; background-position: -483px -223px}
+    &.ui-btn-rounded-yellow {width:152px; height:52px; background-position: -284px -113px}
+    &.ui-btn-rounded-black {width:152px; height:52px; background-position: -284px -3px}
+    &.ui-btn-rounded-pink {width:152px; height:52px; background-position: -284px -58px}
+    &.ui-bucket {width:25px; height:25px; background-position: -478px -80px}
+    &.ui-cement {width:21px; height:25px; background-position: -409px -207px}
+    &.ui-check {width:24px; height:19px; background-position: -456px -225px}
+    &.ui-container-1 {width:278px; height:246px; background-position: -3px -3px}
+    &.ui-check-white {width:24px; height:19px; background-position: -476px -201px}
+    &.ui-close {width:20px; height:22px; background-position: -433px -223px}
+    &.ui-close-white {width:20px; height:22px; background-position: -433px -198px}
+    &.ui-saw {width:25px; height:25px; background-position: -478px -108px}
+    &.ui-twitter {width:36px; height:36px; background-position: -390px -168px}
+    &.ui-copy-link {width:36px; height:36px; background-position: -439px -52px}
+    &.ui-cup {width:52px; height:46px; background-position: -439px -3px}
+    &.ui-employee {width:22px; height:50px; background-position: -326px -168px}
+    &.ui-fb {width:36px; height:36px; background-position: -439px -91px}
+    &.ui-flowers {width:25px; height:20px; background-position: -478px -160px}
+    &.ui-hammer {width:17px; height:25px; background-position: -456px -169px}
+    &.ui-hand {width:39px; height:50px; background-position: -284px -168px}
+    &.ui-info {width:24px; height:26px; background-position: -284px -221px}
+    &.ui-insta {width:36px; height:36px; background-position: -351px -168px}
+    &.ui-life-full {width:26px; height:22px; background-position: -351px -207px}
+    &.ui-toilet {width:17px; height:25px; background-position: -456px -197px}
+    &.ui-life-lost {width:26px; height:22px; background-position: -380px -207px}
+    &.ui-shovel {width:8px; height:25px; background-position: -494px -3px}
+    &.ui-sound-off {width:24px; height:26px; background-position: -311px -221px}
+    &.ui-sound-on {width:24px; height:26px; background-position: -429px -169px}
+    &.ui-whatsapp {width:36px; height:36px; background-position: -439px -130px}
+}
+
+div.info-game {
+    display: none;
+    position: absolute;
+    left: 0; top: 0;
+    width: $screen-width;
+    height: $screen-height;
+    >.wrapper {
+        display: block;
+        position: absolute;
+        left: 0; right: 0; top: 84px; margin: 0 auto;
+        width: $screen-width - 80;
+        height: 450px;
+        touch-action: manipulation;
+        pointer-events: initial;
+        // has to be scroll, not auto
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        color: #fff;
+        .item {
+            display: flex;
+            align-items:center;
+            margin: 1px 0 0 0;
+            >div {
+                font-size: 21px;
+                &:last-child {
+                    padding-bottom: 1px;
+                }
+            }
+            span {
+                flex: 1;
+                border-bottom: 3px dotted #fff;
+                margin: 0 12px;
+            }
+        }
+    }
+}
+
+div.button {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    user-select: none;
+    left: 0; right: 0; top: 0; bottom: 0; margin: auto;
+    height:52px;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 44px;
+    text-transform: uppercase;
+    padding: 0px 6px;
+    >div {
+        display: inline-block;
+        height: 100%;
+    }
+    .left,
+    .right {
+        width: 16px;
+        height: 100%;
+    }
+    .mid {
+        min-width: 120px;
+    }
+    &.pink {
+        .left {
+            background-image: url(../assets/btn-pink-left.png);
+        }
+
+        .mid {
+            background-image: url(../assets/btn-pink-mid.png);
+        }
+
+        .right {
+            background-image: url(../assets/btn-pink-right.png);
+        }
+    }
+
+    &.yellow {
+        .left {
+            background-image: url(../assets/btn-yellow-left.png);
+        }
+
+        .mid {
+            background-image: url(../assets/btn-yellow-mid.png);
+        }
+
+        .right {
+            background-image: url(../assets/btn-yellow-right.png);
+        }
+    }
+
+    &.black {
+        .left {
+            background-image: url(../assets/btn-black-left.png);
+        }
+
+        .mid {
+            background-image: url(../assets/btn-black-mid.png);
+        }
+
+        .right {
+            background-image: url(../assets/btn-black-right.png);
+        }
+    }
+    span.blink,&.blink {
+        display: inline-block;
+        animation: blink 1.0s ease 0.0s infinite;
+    }
+}
+#start-btn,
+#play-btn,
+#again-btn,
+#share-btn,
+#back-btn,
+#submit-btn {
+    width: auto;
+    top: 428px;
+    bottom: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.hidden {
+        display: none;
+    }
+}
+#share-btn {
+    //top: 512px;
+    top: 445px;
+}
+#again-btn {
+    //426px
+    top: 370px;
+}
+#back-btn {
+    top: auto;
+    bottom: 20px;
+    color: #000;
+}
+#sound-btn {
+    display: block;
+    position: absolute;
+    width: 72px; height: 44px;
+    margin: 0; left: auto; right: 0px; top: 0px;
+}
+#submit-btn {
+    position: relative;
+    top: 16px;
+}
+#info-btn {
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    left: auto;
+    right: 0;
+    top: 0;
+    bottom: auto;
+    z-index: 100;
+}
+#highscore-btn {
+    display: block;
+    position: absolute;
+    width: 52px;
+    height: 46px;
+    margin: 0;
+    left: auto;
+    right: 86px;
+    top: 7px;
+    bottom: auto;
+    z-index: 100;
+    .ui-cup {
+        transform: scale(0.8, 0.8);
+    }
+}
+#copy-link-btn {
+    display: inline-block;
+    position: relative;
+    width: 34px; height: 35px;
+}
+
+#hand-1 {
+    display: block;
+    left: 0; right: 0; top: 54%; margin: auto;
+    user-select: none;
+    width:39px; height:50px;
+    opacity: 0;
+}
+div.score {
+    color: #fff;
+    font-size: 24px;
+    text-shadow: -2px 2px 1px #000;
+    padding-top: 32px;
+    padding-left: 32px;
+    height: auto;
+    user-select: none;
+}
+
+div.wrapper-game div.life {
+    left: auto; top: 42px; right: 32px;
+    width: 90px; height: 105px;
+    .heart {
+        display: inline-block;
+        margin: 1px;
+    }
+}
+
+//FOOTER SAVED FROM WEB
+#hb-global-footer {
+    display: block;
+    position: fixed;
+    left: 0; top: auto; bottom: 0; right: 0;
+    background: #efefef;
+    .hb-global-footer-inner-container-content-wrapper {
+        display: block;
+        background: #333;
+        text-align: center;
+    }
+    ul, li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border: none;
+        display: block;
+    }
+    li {
+        display: inline-block;
+        a {
+            display: block;
+            color: #fff;
+            font-size: 10px;
+            text-decoration: none;
+            border-right: 1px solid #676767;
+            padding-right: 22px;
+            margin-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        &:last-child a {
+            border-right: 0;
+            padding-right: 0px;
+            margin-right: 0px;
+        }
+    }
+}
+
+.hb-global-footer-bottombar-container * {
+    margin: 0;
+    padding: 0;
+}
+.bottombar-links-content {
+    text-align: center;
+    padding: 10px;
+}
+
+//
+body.desktop {
+    #hornbach-logo {
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        .hornbach-logo {
+            width: 180px; height: 46px;
+        }
+    }
+    #highscore-btn {
+        left: auto;
+        right: 120px;
+        top: 30px;
+    }
+    #info-btn {
+        right: 30px;
+        top: 30px;
+    }
+    #hb-global-footer li a {
+        font-size: 12px;
+    }
+}
+
+body.mobile {
+    #hornbach-logo {
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        .hornbach-logo {
+            width: 180px; height: 46px;
+        }
+    }
+    .bottombar-links-content {
+        padding: 4px 8px;
+    }
+}
+
+@media (max-height: 812px) {
+    body.mobile {
+        #hornbach-logo {
+            position: relative;
+            left:0px;top:0px;
+            //padding-left: calc((100vw - 320px) / 2);
+            padding-left: 10px;
+            padding-top: 10px;
+            .hornbach-logo {
+                width: 157px; height: 40px;
+            }
+        }
+        #game,#ui {
+            margin: 0 auto;
+        }
+        .game-wrapper {
+            .game-content {
+                top: 60px;
+                bottom: auto;
+                //height: calc(#{$screen-height} - 60px);
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    body.desktop,body.mobile {
+        #hb-global-footer li a {
+            font-size: 14px;
+        }
+    }
+}

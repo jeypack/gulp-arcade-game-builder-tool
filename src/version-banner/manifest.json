@@ -1,0 +1,14 @@
+{
+    "version": "1.0",
+    "title": "Sitebar Game Ad",
+    "description": "Hornbach Arcade Game Banner 2021",
+    "width" : "300",
+    "height": "600",
+    "events": {
+        "enabled": 0
+    },
+    "clicktags": {
+        "clickTAG": "http://www.adform.com"
+    },
+    "source": "index.html"
+}

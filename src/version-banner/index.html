@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xml:lang="de" lang="de">
+  <head>
+    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+		<meta name="author" content="Hornbach" />
+    <meta name="description" content="Spiele jetzt mit und sichere Dir ewigen Ruhm." />
+    <title>Hornbach Arcade Game Banner</title>
+    <!-- build:cssInline --><!-- endbuild -->
+  </head>
+  <body>
+    <div id="game-wrapper" class="game-wrapper">
+      <!-- <div id="info-btn"><div class="button icon ui-info blink"></div></div> -->
+      <div class="game-content">
+        <div id="game" class="wrapper-game">
+          <div id="playground"></div>
+          <div id="score" class="score">00000</div>
+          <div id="life" class="life"></div>
+          <div id="hand-1" class="icon ui-hand"></div>
+        </div>
+        <div id="ui">
+          <div class="video"></div>
+          <div id="play-btn" class="button pink hidden">
+            <div class="left"></div>
+            <div class="mid"><span class="blink"></span></div>
+            <div class="right"></div>
+          </div>
+          <div id="start-btn" class="button pink hidden">
+            <div class="left"></div>
+            <div class="mid"><span class="blink"></span></div>
+            <div class="right"></div>
+          </div>
+          <div id="highscore-points" class="highscore points"><div class="points blink">0</div></div>
+          <div id="highscore-form" class="highscore form">
+            <div class="wrapper">
+              <input type="text" id="nickname" name="name" placeholder="nickname" value="">
+              <div id="submit-btn" class="button yellow hidden">
+                <div class="left"></div>
+                <div class="mid"><span class="blink"></span></div>
+                <div class="right"></div>
+              </div>
+            </div>
+          </div>
+          <div id="highscore-all" class="highscore all"><div class="wrapper"></div></div>
+          <div id="again-btn" class="button black hidden">
+            <div class="left"></div>
+            <div class="mid"><span class="blink"></span></div>
+            <div class="right"></div>
+          </div>
+          <div id="share-btn" class="button black hidden">
+            <div class="left"></div>
+            <div class="mid"><span class="blink"></span></div>
+            <div class="right"></div>
+          </div>
+          <div id="info-game" class="info-game">
+            <div class="wrapper">
+              <div class="item"><div class="icon ui-boost"></div><span></span><div>100</div></div>
+              <div class="item"><div class="icon ui-employee"></div><span></span><div>50</div></div>
+              <div class="item"><div class="icon ui-shovel"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-bausteine"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-bucket"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-brause"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-toilet"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-brush"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-hammer"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-flowers"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-cement"></div><span></span><div>10</div></div>
+              <div class="item"><div class="icon ui-saw"></div><span></span><div>10</div></div>
+            </div>
+          </div>
+          <div id="back-btn" class="button yellow hidden">
+            <div class="left"></div>
+            <div class="mid"><span class="blink"></span></div>
+            <div class="right"></div>
+          </div>
+          <div id="ui-social-share">
+            <div class="ui-wrapper">
+              <div class="icon ui-container-1"></div>
+              <div id="social-share" class="text"></div>
+              <div class="close-btn"><div class="button icon ui-close"></div></div>
+              <div class="social">
+                <!-- Copy link to clipboard -->
+                <div id="copy-link-btn">
+                  <span class="button icon ui-copy-link"></span>
+                </div>
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.hornbach.de/erleben-sie-hornbach-spiel/" target="_blank" class="button">
+                  <span class="icon ui-fb"></span>
+                </a>
+                <!-- Twitter -->
+                <a href="https://twitter.com/intent/tweet?url=https://www.hornbach.de/erleben-sie-hornbach-spiel/&text=Erleben%20Sie%20Hornbach.%20Das%20Spiel." target="_blank" class="button">
+                  <span class="icon ui-twitter"></span>
+                </a>
+                <!-- Whatsapp -->
+                <a href="https://api.whatsapp.com/send?text=https://www.hornbach.de/erleben-sie-hornbach-spiel/" target="_blank" class="button">
+                  <span class="icon ui-whatsapp"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="ground-move-dummy">
+        <div class="tracker"></div>
+        <!-- <div id="sound-btn"><div class="button icon ui-sound-on"></div></div> -->
+      </div>
+    </div>
+    <div id="loader" class="game-loader"><span></span></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/PixiPlugin.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- <script>
+      document.write('<script src="'+ (window.API_URL || 'https://s1.adform.net/banners/scripts/rmb/Adform.DHTML.js?bv='+ Math.random()) +'"><\/script>');
+    </script> -->
+    <!-- build:jsInlineVendor --><!-- endbuild -->
+    <!-- build:jsInline --><!-- endbuild -->
+
+		<script type="text/javascript">
+      // ✅
+      var jsNode = document.createElement('script');
+      // Load in JS
+      jsNode.setAttribute("type", "text/javascript");
+      jsNode.setAttribute("src", "./js/game.min.js");
+      jsNode.onload = function () {
+        var APP_VERSION = '1.4.6',
+          APP_MODIFIED = new Date('2021-09-13 22:18:00');
+        console.log("");
+        console.log("Hornbach Arcade Game Banner 😎");
+        console.log("✔️", "Version:", APP_VERSION);
+        console.log("✔️", "Modified:", APP_MODIFIED);
+        window.enterEGPGame(APP_VERSION, APP_MODIFIED);
+      };
+      document.getElementsByTagName("body")[0].appendChild(jsNode);
+      /*var clickArea = document.getElementById('clickLayer');
+      var clickTAGvalue = dhtml.getVar('clickTAG', 'http://www.example.com');
+      var landingpagetarget = dhtml.getVar('landingPageTarget', '_blank');
+      clickArea.onclick = function() {
+        window.open(clickTAGvalue,landingpagetarget);
+      }*/
+    </script>
+  </body>
+</html>

@@ -1,0 +1,218 @@
+/**
+ * Hornbach Arcade Style Game SAT DATA
+ * Author   : J. Pfeifer @egplusww.com
+ * Created  : 06.12.2020
+ * Modified : 31.12.2020 | 21.06.21 | 06.07.21 | 08.07.21 |
+*/
+(function () {
+
+  'use strict';
+
+  window.EGP = {
+    language: {
+      DE: [
+        { id: 'start-btn', text: 'Spiel Laden', size: '25px', lineHeight: '39px' },
+        { id: 'play-btn', text: 'Spielen', size: '25px', lineHeight: '39px' },
+        { id: 'again-btn', text: 'Nochmal', size: '25px', lineHeight: '39px' },
+        { id: 'back-btn', text: 'Zurück', size: '25px', lineHeight: '39px' },
+        { id: 'share-btn', text: 'Teilen', size: '25px', lineHeight: '39px' },
+        { id: 'submit-btn', text: 'Bestätigen', size: '25px', lineHeight: '39px' },
+        { id: 'video-intro', src: './assets/intro-new.mp4', poster: './assets/intro.jpg', loop: true },
+        { id: 'video-info', src: './assets/info.mp4', poster: '', loop: false },
+        { id: 'video-result-1', src: './assets/01_game-end.mp4', poster: '', loop: false },
+        { id: 'video-result-2', src: './assets/02_game-end.mp4', poster: '', loop: false },
+        { id: 'video-result-3', src: './assets/03_game-end.mp4', poster: '', loop: false },
+        { id: 'video-result-4', src: './assets/04_game-end.mp4', poster: '', loop: false },
+        { id: 'video-result-5', src: './assets/05_game-end.mp4', poster: '', loop: false },
+        { id: 'hornbach-logo', text: 'Auf zu hornbach', href: 'https://www.hornbach.de/' },
+        { id: 'social-share', text: 'Jetzt weitersagen:', content: 'Spiele jetzt mit und sichere Dir ewigen Ruhm.' },
+        { id: 'footer-imprint', text: 'Impressum', href: 'https://www.hornbach.de/services/impressum/' },
+        { id: 'footer-agb', text: 'AGB', href: 'https://www.hornbach.de/services/allgemeine-geschaeftsbedingungen-agb/' },
+        { id: 'footer-daten', text: 'Datenschutzhinweise', href: 'https://www.hornbach.de/services/datenschutzhinweise/' },
+      ],
+    },
+    data: {
+      OFFSET_TRAIN: 7,
+      SCROLL_SPEED_Y: 3.25,
+      SCROLL_SPEED_Y_MAX: 12.0,
+      SCROLL_SPEED_ACC: 0.15,
+      SCROLL_SPEED_ACCELERATION: 0.0005,
+      FRICTION_DEVICE: 0.5,
+      MOVE_SPEED_X: 6,
+      DRAG_SPEED_X: 8,
+      BESERK_TIME: 6,
+      language: 'DE',
+      currentLevel: 0,
+      score: 0,
+      nickname: '',
+      life: 3,
+      isSoundOn: true,
+      sounds: {
+        start: { src: 'sounds/INTRO_MUSIK_4s.mp3' },
+        end: { src: 'sounds/INTRO_MUSIK_4s.mp3' },
+        items: { src: 'sounds/Pling_1.mp3' },
+        mitarbeiter: { src: 'sounds/11_item.mp3' },
+        hupe: { src: 'sounds/INTRO_HUPE.mp3' },
+        crash: { src: 'sounds/hollow_impact_2.mp3' },
+        booster: { src: 'sounds/BoosterAP17_MusicalGames_6s.mp3' },
+      },
+      player: {
+        width: 32,
+        height: 125,
+        heightStart: 60,
+        heightMid: 34,
+        heightEnd: 31
+      },
+      levels: [
+        {
+          name: 'level-1',
+          collectableItems: [
+            { x: 116, y: 194, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 173, y: 272, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 177, y: 449, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 117, y: 513, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 177, y: 589, width: 8, height: 25, name: 'item-shovel', score: 10 },
+            { x: 93, y: 760, width: 8, height: 25, name: 'item-shovel', score: 10 },
+            { x: 280, y: 890, width: 22, height: 47, name: 'item-mitarbeiter', score: 50 },
+            { x: 131, y: 1163, width: 8, height: 25, name: 'item-shovel', score: 10 },
+            { x: 178, y: 1229, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 135, y: 1369, width: 8, height: 25, name: 'item-shovel', score: 10 },
+            { x: 175, y: 1469, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 235, y: 1495, width: 25, height: 20, name: 'item-flower', score: 10 },
+          ],
+          walls: [
+            { x: 18, y: 380, width: 112, height: 25, name: 'wall-1' },
+            { x: 202, y: 380, width: 100, height: 25, name: 'wall-2' },
+            { x: 202, y: 683, width: 100, height: 25, name: 'wall-2' },
+            { x: 18, y: 1030, width: 112, height: 25, name: 'wall-1' },
+            { x: 202, y: 1330, width: 100, height: 25, name: 'wall-2' },
+          ],
+          width: 320,
+          height: 1920,
+        },
+        {
+          name: 'level-2',
+          collectableItems: [
+            { x: 106, y: 214, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 173, y: 292, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 247, y: 419, width: 15, height: 25, name: 'item-brush', score: 10 },
+            { x: 157, y: 509, width: 15, height: 25, name: 'item-brush', score: 10 },
+            { x: 87, y: 583, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 173, y: 760, width: 27, height: 27, name: 'item-hornbach', score: 100 },
+            { x: 110, y: 911, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 81, y: 1163, width: 15, height: 25, name: 'item-brush', score: 10 },
+            { x: 188, y: 1229, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 135, y: 1369, width: 15, height: 25, name: 'item-brush', score: 10 },
+            { x: 280, y: 1400, width: 22, height: 47, name: 'item-mitarbeiter', score: 50 },
+          ],
+          walls: [
+            { x: 18, y: 1040, width: 84, height: 48, name: 'stapler-0' },
+            { x: 18, y: 440, width: 84, height: 48, name: 'stapler-0' }
+          ],
+          width: 320,
+          height: 1920,
+        },
+        {
+          name: 'level-4',
+          collectableItems: [
+            { x: 106, y: 194, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+            { x: 173, y: 272, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+            { x: 169, y: 359, width: 21, height: 25, name: 'item-cement', score: 10 },
+            { x: 57, y: 460, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+            { x: 154, y: 740, width: 21, height: 25, name: 'item-cement', score: 10 },
+            { x: 190, y: 1000, width: 27, height: 27, name: 'item-hornbach', score: 100 },
+            { x: 280, y: 800, width: 22, height: 47, name: 'item-mitarbeiter', score: 50 },
+            { x: 81, y: 1163, width: 21, height: 25, name: 'item-cement', score: 10 },
+            { x: 100, y: 1329, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+            { x: 130, y: 1440, width: 21, height: 25, name: 'item-cement', score: 10 },
+            { x: 235, y: 1520, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+          ],
+          walls: [
+            { x: 18, y: 360, width: 84, height: 48, name: 'stapler-0' },
+            { x: 18, y: 860, width: 84, height: 48, name: 'stapler-0' },
+            { x: 94, y: 569, width: 208, height: 20, name: 'wall-4' },
+            { x: 18, y: 921, width: 66, height: 20, name: 'wall-3-2' },
+            { x: 172, y: 1209, width: 130, height: 20, name: 'wall-3' },
+          ],
+          width: 320,
+          height: 1920,
+        },
+        {
+          name: 'level-1',
+          collectableItems: [
+            { x: 56, y: 194, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 173, y: 272, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 177, y: 479, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 57, y: 513, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 217, y: 589, width: 8, height: 25, name: 'item-shovel', score: 10 },
+            { x: 173, y: 760, width: 8, height: 25, name: 'item-shovel', score: 10 },
+            { x: 280, y: 890, width: 22, height: 47, name: 'item-mitarbeiter', score: 50 },
+            { x: 81, y: 1163, width: 8, height: 25, name: 'item-shovel', score: 10 },
+            { x: 258, y: 1229, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 135, y: 1369, width: 8, height: 25, name: 'item-shovel', score: 10 },
+            { x: 175, y: 1469, width: 25, height: 20, name: 'item-flower', score: 10 },
+            { x: 235, y: 1495, width: 25, height: 20, name: 'item-flower', score: 10 },
+          ],
+          walls: [
+            { x: 18, y: 380, width: 112, height: 25, name: 'wall-1' },
+            { x: 202, y: 380, width: 100, height: 25, name: 'wall-2' },
+            { x: 202, y: 683, width: 100, height: 25, name: 'wall-2' },
+            { x: 18, y: 1030, width: 112, height: 25, name: 'wall-1' },
+            { x: 202, y: 1030, width: 100, height: 25, name: 'wall-2' },
+          ],
+          width: 320,
+          height: 1920,
+        },
+        {
+          name: 'level-2',
+          collectableItems: [
+            { x: 56, y: 214, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 173, y: 292, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 247, y: 419, width: 15, height: 25, name: 'item-brush', score: 10 },
+            { x: 247, y: 509, width: 15, height: 25, name: 'item-brush', score: 10 },
+            { x: 57, y: 513, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 173, y: 760, width: 27, height: 27, name: 'item-hornbach', score: 100 },
+            { x: 110, y: 911, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 81, y: 1163, width: 15, height: 25, name: 'item-brush', score: 10 },
+            { x: 258, y: 1229, width: 22, height: 22, name: 'item-bucket', score: 10 },
+            { x: 135, y: 1369, width: 15, height: 25, name: 'item-brush', score: 10 },
+            { x: 280, y: 1400, width: 22, height: 47, name: 'item-mitarbeiter', score: 50 },
+          ],
+          walls: [
+            { x: 18, y: 1040, width: 84, height: 48, name: 'stapler-0' },
+            { x: 18, y: 440, width: 84, height: 48, name: 'stapler-0' }
+          ],
+          width: 320,
+          height: 1920,
+        },
+        {
+          name: 'level-4',
+          collectableItems: [
+            { x: 56, y: 194, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+            { x: 173, y: 272, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+            { x: 247, y: 359, width: 21, height: 25, name: 'item-cement', score: 10 },
+            { x: 57, y: 460, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+            { x: 154, y: 740, width: 21, height: 25, name: 'item-cement', score: 10 },
+            { x: 190, y: 1000, width: 27, height: 27, name: 'item-hornbach', score: 100 },
+            { x: 280, y: 800, width: 22, height: 47, name: 'item-mitarbeiter', score: 50 },
+            { x: 81, y: 1163, width: 21, height: 25, name: 'item-cement', score: 10 },
+            { x: 190, y: 1329, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+            { x: 70, y: 1440, width: 21, height: 25, name: 'item-cement', score: 10 },
+            { x: 235, y: 1520, width: 15, height: 25, name: 'item-bausteine', score: 10 },
+          ],
+          walls: [
+            { x: 18, y: 360, width: 84, height: 48, name: 'stapler-0' },
+            { x: 18, y: 860, width: 84, height: 48, name: 'stapler-0' },
+            { x: 94, y: 569, width: 208, height: 20, name: 'wall-4' },
+            { x: 18, y: 921, width: 130, height: 20, name: 'wall-3' },
+            { x: 94, y: 1209, width: 208, height: 20, name: 'wall-4' },
+          ],
+          width: 320,
+          height: 1920,
+        },
+      ],
+      collectedItems: [],
+    }
+  };
+
+}());
