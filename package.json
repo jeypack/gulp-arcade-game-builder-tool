@@ -1,7 +1,7 @@
 {
-  "name": "hornbach_arcade_game_banner_2021",
+  "name": "gulp-arcade-game-builder-tool",
   "version": "1.0.0",
-  "description": "Arcade Style Game",
+  "description": "Arcade Style Game Based on PixiJS Engine",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
