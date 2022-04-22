@@ -3,7 +3,8 @@
 
 
 ## Getting started
-Already a pro? [Go to game instructions at the bottom](#arcade-pixi-game-scroller)!
+Already a gulp pro? [Go to game instructions at the bottom](#arcade-pixi-game-scroller)!\
+Or check out the [official gulpJS Website](https://gulpjs.com/docs/en/getting-started/quick-start) for more Infos how to install and work with gulp.
 
 ## Commandline and Gulp
 
@@ -62,13 +63,20 @@ Build banner in production mode via `gulp bannerbuild`.
 
 
 # Arcade Pixi Game Scroller
-EG+ Arcade-Pixi Game Scroller Hornbach: 1.0.0\
+EG+ Arcade-Pixi Game Scroller Hornbach: 1.2.0\
 HTML5 arcade-style game based on 'PixiJS Creation Engine' a flexible and fast 2D WebGL renderer.
 
 ## Description
 The user interface is completely implemented with HTML5 elements.\
 The cutscenes and also the game instructions were implemented with videos.\
-Accordingly, there is less text to maintain. However, a video in the desired language must be created for the instructions and also for each cutscene.
+Accordingly, there is less text to maintain. However, a video in the desired language must be created for the instructions and also for each cutscene.\
+In the course of development, not only the high score but also the cutscenes were removed and the latter replaced by static visual material.
+
+### Version 1.2.0
+Delivery status with static images, without cutscenes via video and without highscore.
+
+### Version 2.0.0
+TODO.
 
 ### Game `data`
 Game relevant data is located in the file `game.js` as properties of `window.EGP`.\
@@ -151,9 +159,6 @@ Todo
 
 ### Game `JS`
 Todo
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
 ## Visuals
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
