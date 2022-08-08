@@ -63,7 +63,9 @@ Build banner in production mode via `gulp bannerbuild`.
 
 
 # Arcade Pixi Game Scroller
-EG+ Arcade-Pixi Game Scroller Hornbach: 1.2.0\
+EG+ Arcade-Pixi Game Scroller Hornbach
+>Version: 1.2.0
+
 HTML5 arcade-style game based on 'PixiJS Creation Engine' a flexible and fast 2D WebGL renderer.
 
 ## Description
@@ -72,16 +74,16 @@ The cutscenes and also the game instructions were implemented with videos.\
 Accordingly, there is less text to maintain. However, a video in the desired language must be created for the instructions and also for each cutscene.\
 In the course of development, not only the high score but also the cutscenes were removed and the latter replaced by static visual material.
 
-### Version 1.2.0
+#### `Version 1.2.0`
 Delivery status with static images, without cutscenes via video and without highscore.
 
-### Version 2.0.0
+#### `Version 2.0.0`
 TODO.
 
 ### Game `data`
 Game relevant data is located in the file `game.js` as properties of `window.EGP`.\
 All language-related properties for button labels, videos and other texts are addressed via unique `id`.\
-```
+```js
 window.EGP = {
     language: {
       DE: [
@@ -91,7 +93,7 @@ window.EGP = {
 The property `data` holds, among other things, game constants for the player, the number of lives, but also a property `sounds` with all the sounds needed for the game.\
 Some properties may not be changed and are only there for the sake of completeness or become interesting when the graphic elements and their dimensions are adapted.\
 [Go to the list of the protected properties below](#protected-properties).
-```
+```js
 window.EGP = {
     language: {
       ...
@@ -121,7 +123,7 @@ window.EGP = {
       ...
 ```
 However, one of the most important properties is certainly `levels`, which, in addition to the names, transformations and values of the objects to be collected, also contains the corresponding values for the obstacles or walls.
-```
+```js
 window.EGP = {
     ...
     data: {
